@@ -17,8 +17,8 @@ const notificationService = {
     };
   },
   getUnread: async (): Promise<Notification[]> => {
-    const response = await api.get<any[]>('/notifications/unread');
-    return response.data.map(mapResponse);
+    const response = await api.get<any>('/notifications/unread');
+    return (response.data.content || []).map(mapResponse);
   },
   markAsRead: async (id: number): Promise<void> => {
     await api.put(`/notifications/${id}/read`);
